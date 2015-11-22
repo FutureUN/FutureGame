@@ -41,7 +41,7 @@ var sketch = function ()
 	draw = function ()
 	{
 		//clear();
-		background(180,50,80);
+		background(160,50,80);
 		textSize(30);
 		text ( Count, width-40 , 30)
 		Plane.position.x = constrain(mouseX-psize/2,0,width-psize);
