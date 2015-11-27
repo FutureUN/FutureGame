@@ -1,4 +1,4 @@
-var sketch = function ()
+var Stick = function ()
 {
 	var stick = [];  
 	var top = [];  
@@ -11,14 +11,36 @@ var sketch = function ()
 
 	var NUMBER_OF_DONUTS = 6;	
 	
-	setup= function ()
+	this.setup= function ()
 	{	
-		createCanvas(600,600);
 		//console.log (INF);
 		background(200,50,100);
 		initGame(NUMBER_OF_DONUTS);
 
 	};
+
+
+	draw = function ()
+	{
+		background(200,50,100);
+		if(donuts[2].length == NUMBER_OF_DONUTS )
+       	{
+       		//updateSprites(false);   		
+           	text("GANOOOOOOOOOOOOOOOOOOOO!!!!!11",width/2,height/2);
+           	console.log("GANOOOOOOOOOOOOOOOOOOOO");
+		}
+		//console.log(selected);
+		for ( var i = 0 ; i < 3 ; i ++ )
+			takeOne(i);		
+		if (selected != -1 )
+		{
+			donuts[comesFrom][selected].position.y = 300;
+			for ( var i = 0 ; i < 3 ; i ++ )
+				grabOne(i)
+		}
+		
+		drawSprites();
+	}
 
 	initGame = function (n)
 	{
@@ -74,28 +96,7 @@ var sketch = function ()
 		}
 	}
 
-	draw = function ()
-	{
-		background(200,50,100);
-		if(donuts[2].length == NUMBER_OF_DONUTS )
-       	{
-       		//updateSprites(false);   		
-           	text("GANOOOOOOOOOOOOOOOOOOOO!!!!!11",width/2,height/2);
-           	console.log("GANOOOOOOOOOOOOOOOOOOOO");
-		}
-		//console.log(selected);
-		for ( var i = 0 ; i < 3 ; i ++ )
-			takeOne(i);		
-		if (selected != -1 )
-		{
-			donuts[comesFrom][selected].position.y = 300;
-			for ( var i = 0 ; i < 3 ; i ++ )
-				grabOne(i)
-		}
-		
-		drawSprites();
-	}
 }
 
-var myp5 = new p5(sketch, 'stick');
+Stick.prototype = new sketch;
 

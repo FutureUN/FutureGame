@@ -1,5 +1,5 @@
 
-var sketch = function ()
+var Cloud = function ()
 {
 	var GRAVITY = .09; 
 	var panfu, GameOver; 
@@ -7,11 +7,9 @@ var sketch = function ()
 	var floor; 
 	var cloimg, colp, mont;
 	var v; 
-	setup = function()
+	this.setup = function()
 	{
-		createCanvas(600,400);
-		colorMode(HSB, 360, 100, 100);
-		//frameRate(5000);
+		
 		colp = loadImage("images/colpatria.png");
 		mont = loadImage("images/mount.png");
 		clouds = new Group();
@@ -120,4 +118,4 @@ var sketch = function ()
 
 
 };
-var myp5 = new p5(sketch, 'cloud');
+Cloud.prototype = new sketch;

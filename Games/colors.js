@@ -1,9 +1,8 @@
-
-var sketch = function ()
+var Colors = function ()
 {
 	var fst_cube , color_Cube, cubes, drop;
 	var gameOver = true;
-	setup = function()
+	this.setup = function()
 	{
 		createCanvas(600,400);
 		colorMode(HSB, 360, 100, 100);
@@ -65,3 +64,4 @@ var sketch = function ()
 
 };
 var myp5 = new p5(sketch, 'colors'); 
+Colors.prototype = new sketch;

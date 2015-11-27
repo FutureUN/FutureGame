@@ -1,5 +1,5 @@
 
-var sketch = function ()
+var Galaga = function ()
 {	
 	var Plane;
 	var img; 
@@ -9,12 +9,10 @@ var sketch = function ()
 	var frame = 10;
 	var ROWS = 5 , COL = 12;
 	var bgImg;
-	setup = function()
+	
+	this.setup = function()
 	{
-		createCanvas(600,400);
-		colorMode(HSB, 360, 100, 100);
 		frameRate(frame);
-
 		bgImg = loadImage("images/flappy_bg.png");
 
 		asteroids = new Group(); 
@@ -77,5 +75,4 @@ var sketch = function ()
 	};
 
 };
-
-var myp5 = new p5(sketch, 'future');
+Galaga.prototype = new sketch;

@@ -1,13 +1,11 @@
-var sketch = function ()
+var Bounce = function ()
 {
 	var GRAVITY = .2; 
 	var bounce, floor; 
 	var static = false;
 	var obstacles , obstacle; 
-	setup = function()
+	this.setup = function()
 	{
-		createCanvas(600,400);
-		colorMode(HSB, 360, 100, 100);
 
 		bounce = createSprite(width/2,height/2,30,30);
 		bounce.draw = function(){ fill(180,100,100); ellipse(0,0,30,30) };
@@ -77,4 +75,4 @@ var sketch = function ()
 
 
 };
-var myp5 = new p5(sketch, 'bounce');
+Bounce.prototype = new sketch;
