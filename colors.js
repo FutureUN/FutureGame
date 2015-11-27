@@ -1,119 +1,67 @@
 
-
 var sketch = function ()
 {
-	var color_cube[] ;
-	var fst_cube = width / 10 ;
-	
-	setup= function ()
+	var fst_cube , color_Cube, cubes, drop;
+	var gameOver = true;
+	setup = function()
 	{
-		createCanvas ( 600, 600 );
-		background (200, 50, 100);
+		createCanvas(600,400);
+		colorMode(HSB, 360, 100, 100);
+		background(200,50,100);
+		//Create a group of sprites "cubes" with different colors 
+		//that will be the target of the drop.
+		cubes= new Group();
+		fst_cube = width / 10; 
+		for ( var i = 0 ; i < 5 ; i ++ )	
+		{
+			color_Cube = createSprite( fst_cube, height-50, width/5 , 100); 
+			color_Cube.shapeColor =  addColor(i); 
+			fst_cube += width / 5;
+			cubes.add(color_Cube);
+		}	
+		drawSprites(cubes);		
+	};
+	
+	addColor= function(n)
+	{
+	//this function gives a color according to the number in the parameter 
+		var color; 
+		switch(n) 
+		{
+        	case 0:
+        		color = "yellow" ;
+        		break;
+        	case 1:
+        		color = "green" ; 
+        		break;
+        	case 2: 
+        		color = "blue";
+        		break;
+        	case 3:
+        		color = "purple" ;
+        		break;
+        	case 4:
+        		color = "pink" ;
+        		break;
+    		default:
+        	    color = 0;
+		}
+		return color;
 	}
-	// draw function ()
-// 	{
-// 		
-// 		for ( var i = 0 ; i < 5 ; i ++ )
-// 		{
-// 			color_cube.push( createSprite(fst_cube + width /2 , 500 , width / 5 , 100));
-// 		} 
-// 		drawSprites();
-// 	}
-}
+// 
+ 	draw = function()
+ 	{
+		if ( !GameOver )
+		{
+			drop = createSprite( width /2 , height /2 , 100 , 100); 
+		}
+		drawSprite(drop);
+ 	};
+    mousePressed = function()
+   {
+  		if(GameOver)
+    		GameOver= false;
+	}
+
+};
 var myp5 = new p5(sketch, 'colors'); 
-/*var sketch = function ()
-{
-	var color_cube;  
-	var selected = -1;
-	var sizeSelected = 0;
-	var comesFrom = -1;
-
-	var NUMBER_OF_DONUTS = 6;	
-	
-	setup= function ()
-	{	
-		createCanvas(600,600);
-		//console.log (INF);
-		background(200,50,100);
-		initGame(NUMBER_OF_DONUTS);
-
-	};
-
-	initGame = function (n)
-	{
-		for ( var i = 0 ; i < 3 ; i ++  )
-		{
-			stick.push( createSprite(width*(i+1)/4, 500 , 20, 300));
-			top.push(createSprite(width*(i+1)/4, 340 , 20, 20));
-			stick[i].mouseActive = true;
-			top[i].mouseActive = true;
-		}
-		for(var i =0 ; i< n ; i ++)
-		{
-
-			donut = createSprite(width /4 ,600-(i*40+20), 150 - ( i * 20 ),40);
-			donuts[0].add(donut);
-			donuts[0][i].mouseActive= true;
-		}
-		drawSprites();
-	};
-	grabOne = function (n)
-	{
-		if (top[n].mouseIsPressed)
-			{
-		//		console.log("yeah" + donuts1[donuts1.length-1].width ) ;
-				if (donuts[n].length == 0 || donuts[n][donuts[n].length-1].width > sizeSelected )
-				{
-					donuts[n].add (createSprite(width * (n+1) /4 ,600-(donuts[n].length*40+20), sizeSelected,40));
-					donuts[n][donuts[n].length-1].shapeColor = donuts[comesFrom][selected].shapeColor;
-					donuts[n][donuts[n].length-1].mouseActive = true;
-					donuts[comesFrom][selected].remove();
-					selected = -1;
-				}
-				else if ( donuts[n][donuts[n].length-1].width == sizeSelected)
-				{
-					donuts[n][donuts[n].length-1].position.y =600-((donuts[n].length-1)*40+20)
-					selected = -1;
-				}
-			}
-	}
-
-
-	takeOne = function(n)
-	{
-		if ( donuts[n].length > 0)
-		{
-			if ( donuts[n][donuts[n].length-1].mouseIsPressed && selected == -1) 
-			{	
-				selected = donuts[n].length-1;
-				sizeSelected = donuts[n][selected].width;
-			//donuts1[donuts1.length-1].remove();
-				comesFrom = n;			
-			}
-		}
-	}
-
-	draw = function ()
-	{
-		background(200,50,100);
-		if(donuts[2].length == NUMBER_OF_DONUTS )
-       	{
-       		//updateSprites(false);   		
-           	text("GANOOOOOOOOOOOOOOOOOOOO!!!!!11",width/2,height/2);
-           	console.log("GANOOOOOOOOOOOOOOOOOOOO");
-		}
-		//console.log(selected);
-		for ( var i = 0 ; i < 3 ; i ++ )
-			takeOne(i);		
-		if (selected != -1 )
-		{
-			donuts[comesFrom][selected].position.y = 300;
-			for ( var i = 0 ; i < 3 ; i ++ )
-				grabOne(i)
-		}
-		
-		drawSprites();
-	}
-}
-
-var myp5 = new p5(sketch, 'stick'); 
