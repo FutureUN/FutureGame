@@ -6,12 +6,13 @@ var sketch = function()
 	var game, play, numbergames = 5, bool = false;
 	var square, Squares;
 	var tex = ["Galaga", "Cloud", "Stick", "Colors", "Bounce"]
-	imgs = [ ];
+	imgs = [];
 	setup = function(){ //Overwrite
 	
 		createCanvas(600,600);
 		colorMode(HSB, 360, 100, 100);
 		play = false;
+		setImages();
 		Squares = new Group(); 
 		for(var i = 0 ; i < numbergames; i ++ )
 		{
@@ -32,8 +33,11 @@ var sketch = function()
 			{
 				if(Squares[i].mouseIsOver)
 				{
-					background(50*(i),100,100);
-					textSize(40);
+					image(imgs[i],0,0,600,600);
+					fill(60*i,60,30);
+					textFont("Helvetica");
+					textAlign(CENTER);
+					textSize(50);
 					text(tex[i],width/2,100);
 				}
 				if(Squares[i].mouseIsPressed)
@@ -80,8 +84,11 @@ var sketch = function()
 
 
 	setImages = function(){
-		imgs.push();
-
+		imgs.push(loadImage("Img/Galaga.png"));
+		imgs.push(loadImage("Img/Cloud.png"));
+		imgs.push(loadImage("Img/stick.png"));
+		imgs.push(loadImage("Img/stick.png"));
+		imgs.push(loadImage("Img/stick.png"));
 	}
 }
 

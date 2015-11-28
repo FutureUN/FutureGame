@@ -5,18 +5,20 @@ var Cloud = function ()
 	var panfu, GameOver; 
 	var cloud , clouds , Count =0; 
 	var floor; 
-	var cloimg, colp, mont;
+	var cloimg, colp, mont, trans;
 	var v; 
 	this.setup = function()
 	{
-		
+
 		colp = loadImage("images/colpatria.png");
 		mont = loadImage("images/mount.png");
 		clouds = new Group();
-		cloimg = loadImage("images/blackcloud.png",20,20); 
+		cloimg = loadImage("images/whitecloud.png",20,20); 
+		trans = loadImage("images/transmilenio.png",30,109);
 		GameOver = true;
 		panfu = createSprite(width/2, height/2, 30, 30); 
 		panfu.shapeColor =255;
+		panfu.addImage(trans);
 
 		floor = createSprite(width/2,height,width,30);
 		floor.shapeColor = 35 ;
@@ -36,8 +38,8 @@ var Cloud = function ()
 			if(panfu.position.y > v +height/2)
 				die();
 			camera.off();
-			image(mont,0,140,width,250);
-			image(colp,width/2,90,100,310);
+			image(mont,0,200,width,height);
+			image(colp,width/2,90,100,520);
 			camera.on();
 			textSize(30);			
 			text ( Count, width-40 , v)
@@ -50,7 +52,7 @@ var Cloud = function ()
 				if(clouds[i].position.y > panfu.position.y + height/2){
 					clouds[i].remove();
 					cloud = createSprite( random (0,width),panfu.position.y -height ,70,30)
-					//cloud.addImage(cloimg);
+					cloud.addImage(cloimg);
 					clouds.add(cloud);
 					cloud.immovable = true;
 				}
@@ -97,7 +99,7 @@ var Cloud = function ()
 		panfu.velocity.y = 0;
 		for(var i =0 ; i<random(3,4) ; i ++){
 		cloud = createSprite(random(0,width),random(0,height-30), 70,30)
-		//cloud.addImage(cloimg);
+		cloud.addImage(cloimg);
 		clouds.add(cloud);
 		cloud.immovable = true;
 		}
@@ -108,7 +110,7 @@ var Cloud = function ()
 		cloud.remove();
 		panfu.velocity.y= -8;
 		cloud = createSprite( random (0,width),panfu.position.y -height,70,30)
-			//cloud.addImage(cloimg);
+			cloud.addImage(cloimg);
 			clouds.add(cloud);
 			cloud.immovable = true;
 		Count++;
