@@ -1,6 +1,6 @@
 var Colors = function ()
 {
-	var fst_cube , color_Cube, cubes, drop;
+	var fst_cube , color_Cube,n, cubes, drop;
 	var GameOver = true;
 	this.setup = function()
 	{
@@ -55,19 +55,28 @@ var Colors = function ()
  			drawSprite(drop);
  			drop.velocity.y = 1.0;
  		    drop.position.x = constrain(mouseX, 0, width);	
+			for ( var i = 0 ; i < 5 ; i ++ )	
+				drop.overlap(cubes[i],check(i));//(cubes[i],i));		
  		}
 
  	};
  	NewGame = function ()
  	{
  			drop = createSprite( width /2 , 100 , 20 , 20);
- 			drop.shapeColor = addColor( random (0,4) ); 
+ 			drop.shapeColor = addColor( 4 ); 
+ 	};
+ 	check = function (n)//cube,n)
+ 	{
+ 		//if ( drop.shapeColor == cube.shapeColor )
+ 			text ( n, 500,200);
  	};
     mousePressed = function()
    {
   		if(GameOver)
+  		{
     		GameOver= false;
-    	NewGame();
+    	    NewGame();
+    	}    
 	}
 
 };
