@@ -71,7 +71,10 @@ var Colors = function ()
  		if ( drop.shapeColor == cube.shapeColor )
  			NewGame();
  		else 
- 			GameOver = true;	
+	    {
+	    	text ( 'CLIK WITH THE MOUSE FOR A NEW GAME');
+ 			GameOver = true;
+ 		}		
  	};
     mousePressed = function()
    {
