@@ -50,25 +50,28 @@ var Colors = function ()
  	{
  		background(200,50,100);
  		drawSprites(cubes);	
- 		if ( ! GameOver )
+ 		if ( ! GameOver ) // if is playing 
  		{
  			drawSprite(drop);
  			drop.velocity.y = 1.0;
  		    drop.position.x = constrain(mouseX, 0, width);	
 			for ( var i = 0 ; i < 5 ; i ++ )	
-				drop.overlap(cubes[i],check(i));//(cubes[i],i));		
+				if ( drop.overlap(cubes[i]) ) // check the overlapping and send to the function
+					check(cubes[i],i,drop);
  		}
-
  	};
  	NewGame = function ()
  	{
  			drop = createSprite( width /2 , 100 , 20 , 20);
  			drop.shapeColor = addColor( 4 ); 
+ 			drop.velocity.y = 1.0;
  	};
- 	check = function (n)//cube,n)
+ 	check = function (cube, n,drop)//evaluate if the overlap was with the correct cube 
  	{
- 		//if ( drop.shapeColor == cube.shapeColor )
- 			text ( n, 500,200);
+ 		if ( drop.shapeColor == cube.shapeColor )
+ 			NewGame();
+ 		else 
+ 			GameOver = true;	
  	};
     mousePressed = function()
    {
