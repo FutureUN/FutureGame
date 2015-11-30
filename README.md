@@ -31,8 +31,9 @@ The mini games are:
 
  <img src="Img/Galaga.png" alt="Galaga" with="250" height="250"></img>
 
-- Sticks 
- <img src="Img/stick.png" alt="Sticks" with="250" height="50"></img>
+- Sticks
+
+ <img src="Img/stick.png" alt="Sticks" with="250" height="250"></img>
  
 !! Note: Color drop and Bounce are under development !!
 
