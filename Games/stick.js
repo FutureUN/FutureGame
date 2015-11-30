@@ -42,6 +42,7 @@ var Stick = function ()
 		}
   		
 	}
+
 var win ;
 	draw = function ()
 	{
