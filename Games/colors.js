@@ -1,11 +1,11 @@
 var Colors = function ()
 {
 	var fst_cube , color_Cube,n, cubes, drop;
-	var count = 0;
+	var count =0;
 	var GameOver = true;
 	this.setup = function()
 	{
-		createCanvas(600,400);
+		//createCanvas(600,600);
 		colorMode(HSB, 360, 100, 100);
 		//Create a group of sprites "cubes" with different colors 
 		//that will be the target of the drop.
@@ -13,7 +13,7 @@ var Colors = function ()
 		fst_cube = width / 10; 
 		for ( var i = 0 ; i < 5 ; i ++ )	
 		{
-			color_Cube = createSprite( fst_cube, 500, width/5 , 50); 
+			color_Cube = createSprite( fst_cube, 600, width/5 , 50); 
 			color_Cube.shapeColor =  addColor(i); 
 			fst_cube += width / 5;
 			cubes.add(color_Cube);
@@ -47,31 +47,63 @@ var Colors = function ()
 		return color;
 	}
 // 
+var spriteEx ;
+var sprScore ;
  	draw = function()
  	{
  		background(200,50,100);
  		drawSprites(cubes);	
- 		if ( ! GameOver ) // if is playing 
+ 		if ( !GameOver ) // if is playing 
  		{
- 			drawSprite(drop);
- 			drop.velocity.y = (count/5) + 1;
+ 			
+ 			drawSprites();
+ 			drop.velocity.y =(count > 8) ? (count/2 * 0.5)  : 2;
  		    drop.position.x = constrain(mouseX, 0, width);	
- 		    text ( count , 200 , 200);
-			for ( var i = 0 ; i < 5 ; i ++ )	
+ 		  	
+ 			
+ 			for ( var i = 0 ; i < 5 ; i ++ )	
 				if ( drop.overlap(cubes[i]) ) // check the overlapping and send to the 
 				//function that checks it 
 					check(cubes[i],i,drop);
  		}
  	};
+ 	var arrScore = [];
+ 	score = function(s)
+ 	{
+
+ 		text (s, 200,200);
+ 		
+ 			console.log ( arrScore.length);
+ 			for ( var i = 0 ; i < arrScore.length; i ++)
+ 			{
+ 				arrScore[i].remove();
+ 			}
+ 			for ( var j = 0 ; j < s.length; j ++ )
+ 			{	
+ 				var imgN = loadImage("images/numbers/"+s[j]+".png");
+ 				if ( j == arrScore.length)
+ 				{
+ 					arrScore.push(createSprite ( 200+60*j,200,60,60));
+ 					arrScore[j].remove();
+ 				}
+ 				arrScore[j] = createSprite ( 50+60*j,50,60,60);
+ 				arrScore[j].addImage(imgN);
+ 			}
+ 		
+ 	}
  	NewGame = function () // starts a new game 
  	{
                 
 			var nColor = addColor( GetRandom() );
 			var got = loadImage("images/"+nColor+".png");
- 			drop = createSprite( width /2 , 100 , 20 , 20);
+ 			drop = createSprite( width /2 , 0 , 20 , 20);
+ 			 
  			drop.shapeColor = nColor; 
-                drop.addImage(got);
-                        drop.velocity.y = 30;
+            drop.addImage(got);
+            drop.velocity.y = 30;
+            score(count.toString());
+ 			
+
  	};
  	check = function (cube, n,drop)//evaluate if the drop overlap was with the correct cube 
  	// so, it define if continue the game, or finish it 
@@ -83,6 +115,11 @@ var Colors = function ()
  		}	
  		else 
 	    {
+	   		for ( var i = 0 ; i < arrScore.length; i ++)
+ 			{
+ 				arrScore[i].remove();
+ 			}
+	    	arrScore = [];
 	    	count = 0;
  			GameOver = true;
  		}		
