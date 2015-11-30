@@ -23,13 +23,15 @@ More information: (http://p5js.org/)
 The instruction for each game will be in the comments at the begging of the code.
 
 The mini games are:
-- Clouds
- 
- <img src="Img/Cloud.png" alt="Cloud" with="250" height="250"></img>
+
  
 - "Galaga"
 
  <img src="Img/Galaga.png" alt="Galaga" with="250" height="250"></img>
+
+- Clouds
+ 
+ <img src="Img/Cloud.png" alt="Cloud" with="250" height="250"></img>
 
 - Sticks
 
