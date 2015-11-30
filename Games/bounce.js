@@ -7,7 +7,8 @@ var Bounce = function ()
 	var GRAVITY = .2; 
 	var bounce, floor; 
 	var static = false;
-	var obstacles , obstacle; 
+	var obstacles , obstacle, obstacle2, star; 
+	var win = loadImage("images/win.png");
 	this.setup = function()
 	{
 
@@ -21,8 +22,13 @@ var Bounce = function ()
 		floor.shapeColor = 0;
 		floor.immovable = true;
 		obstacles.add(floor);
-		obstacle = createSprite(width/2,height-90,40,10);
-		obstacles.add(obstacle);
+		obstacle = createSprite(width/2,height-90,40,40);
+		//obstacles.add(obstacle);
+		obstacle.mouseActive = true;
+		obstacle2 = createSprite(width/4,height-90,40,40);
+		obstacle2.mouseActive = true;
+		star = createSprite(width/8,60,40,40);
+		//obstacles.add(obstacle);
 
 	};
 
@@ -36,8 +42,23 @@ var Bounce = function ()
 		if(!static)
 			bounce.velocity.y += GRAVITY;
 
+		bounce.position.x = constrain(bounce.position.x, 0 + bounce.width/2, width- bounce.width/2);
+		if ( obstacle.mouseIsPressed ) 
+		{	
+				console.log("asfsdfsd");
+				obstacle.position.x=mouseX;
+				obstacle.position.y=mouseY;
+		}
+		if ( obstacle2.mouseIsPressed ) 
+		{	
+				console.log("asfsdfsd");
+				obstacle2.position.x=mouseX;
+				obstacle2.position.y=mouseY;
+		}
 		bounce.collide(obstacles, function(){static = true; bounce.velocity.y=0; });
-
+		bounce.collide(obstacle, function(){static = true; bounce.velocity.y=0; });
+		bounce.collide(obstacle2, function(){static = true; bounce.velocity.y=0; });
+		bounce.collide(star, function() {text ("ganooooo",200,200);})
 		drawSprites();
 
 	};
