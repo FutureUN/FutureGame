@@ -12,13 +12,13 @@ The games _DOESN'T_ run correctly on  GOOGLE CHROME, so we define the prefered b
 
 ## Instalation 
 
-    ```sh
+    
     $ git clone https://github.com/FutureUN/FutureGame.git
     $ cd FutureGame
-    ```
+    
 
-For the game we used the P5 js play libraries. Used for the creation of games and plaything. 
-More information: (http://p5play.molleindustria.org)
+For the game we used the P5 js libraries. Used for the creation of games and plaything. 
+More information: (http://p5js.org/)
 
 The instruction for each game will be in the comments at the begging of the code.
 
@@ -32,8 +32,10 @@ The mini games are:
  <img src="Img/Galaga.png" alt="Galaga" with="250" height="250"></img>
 
 - Sticks 
- <img src="Img/Stick" alt="Sticks" with="250" height="50"></img>
+ <img src="Img/stick.png" alt="Sticks" with="250" height="50"></img>
  
+!! Note: Color drop and Bounce are under development !!
+
 - Color drop
  
 - Bounce 
