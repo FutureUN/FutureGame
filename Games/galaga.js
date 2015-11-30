@@ -3,7 +3,7 @@ var Galaga = function ()
 {	
 	var Plane;
 	var img; 
-	var psize = 40, GameOver;
+	var psize = 50, GameOver;
 	var asteroids, Count, level = 0; 
 	var bulls ;
 	var frame = 1;
@@ -34,8 +34,7 @@ var Galaga = function ()
 		textSize(30);
 		if(!GameOver){
 			background(0);
-			text ( Count, width-40 , 30)
-			Plane.position.x = constrain(mouseX-psize/2,0,width-psize);
+			Plane.position.x = constrain(mouseX,psize/2,width-psize/2);
 
 			//camera.position.y = (Plane.position.y);
 
@@ -52,7 +51,7 @@ var Galaga = function ()
 				win();
 
 			animation( bgImg, width/2,height/2);
-
+			text ( Count, width-40 , 30)
 			camera.on();
 			asteroids.overlap(bulls,erase);
 			drawSprites();
@@ -89,7 +88,7 @@ var Galaga = function ()
 	mousePressed = function() 
 	{
 		if(bulls.length<3){
-			var s = createSprite(constrain(mouseX-psize/2,0,width-psize),height/1.2 - 10, 5,10);
+			var s = createSprite(constrain(mouseX,psize/2,width-psize/2),height/1.2 - 10, 5,10);
 			bulls.add(s);
 			s.velocity.y =  -4;
 			s.life=height/1.5;
