@@ -8,14 +8,18 @@ var Galaga = function ()
 	var bulls ;
 	var frame = 1;
 	var ROWS = 5 , COL = 12, total;
-	var bgImg, planeimg;
+	var bgImg, planeimg, bbee, gbee;
 	
 	this.setup = function()
 	{
 
 		frameRate(frame);
+		// ####Animaciones ####
 		bgImg = loadAnimation("images/Galaga/back1","images/Galaga/back2","images/Galaga/back3","images/Galaga/back4");
 		planeimg = loadImage("images/Galaga/Galaga.png");
+		bbee = loadAnimation("images/Galaga/bbee1.png", "images/Galaga/bbee2.png");
+		gbee = loadAnimation("images/Galaga/gbee1.png", "images/Galaga/gbee2.png");
+
 		bgImg.frameDelay = 10;
 		GameOver = true;
 		asteroids = new Group(); 
@@ -105,19 +109,20 @@ var Galaga = function ()
 		Count++;
 	};
 
-	levels = function(level)
+	levels = function(level) //Retorna el nivel deseado 
 	{
 		switch(level){
 		case 0:
+		// !!!!!! LEVEL #1 !!!!!!!
 			for(var i=0;i<ROWS;i++)
 	  		{
 	  			for(var j=i; j<COL-i; j++)
 	  			{
 	  				var a = createSprite( 25*(j+1),25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.2;
+	  				a.velocity.y=0.15;
 	  				total++;
-	  				a.addAnimation("hla","images/Galaga/gbee1.png", "images/Galaga/gbee2.png");
+	  				a.addAnimation("green",gbee);
 	  				a.animation.frameDelay = 50;
 	  
 	  			}
@@ -125,25 +130,32 @@ var Galaga = function ()
 	  			{
 	  				var a = createSprite( 25*(j) + 25 *COL,25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.2;
+	  				a.velocity.y=0.15;
 	  				total++;
-	  				a.addAnimation("hola","images/Galaga/bbee1.png", "images/Galaga/bbee2.png");
+	  				a.addAnimation("blue",bbee);
 	  				a.animation.frameDelay = 50;
 	  			}
 	  		}
 	  		break;
 	  	case 1:
+	  	//!!!!!!! LEVEL # 2 !!!!!!!
 	  		for(var i=0;i<ROWS;i++)
 	  		{
 	  			for(var j=i; j<COL-i; j++)
 	  			{
-	  				var a = createSprite( 48*(j+1),25*(i+1), 20,20);
+	  				var a = createSprite( 45*(j+1),25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.2;
-	  				total ++ ;
+	  				a.velocity.y=0.3;
+	  				total++;
+	  				if(j%2 !=0)
+	  					a.addAnimation("green",gbee);
+	  				else 
+	  					a.addAnimation("blue",bbee);
+	  				a.animation.frameDelay = 50;
+	  
 	  			}
-	  		break;
 	  		}
+	  		break;
 	  	default:
 	  		break;
 		}
