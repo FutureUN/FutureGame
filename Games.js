@@ -34,7 +34,7 @@ var sketch = function()
 				if(Squares[i].mouseIsOver)
 				{
 					image(imgs[i],0,0,600,600);
-					fill(60*i,60,30);
+					fill(5,95,100);
 					textFont("Helvetica");
 					textAlign(CENTER);
 					textSize(50);
