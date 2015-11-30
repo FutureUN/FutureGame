@@ -1,4 +1,9 @@
+// This version only contain 2 levels. for the nonce...
 
+// Instructions: move the plane with the mouse 
+// and shoot with a click (max 3 bullets) for kill the Aliens  and Winn!!!!! 
+//
+//
 var Galaga = function ()
 {	
 	var Plane;
