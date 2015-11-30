@@ -47,6 +47,7 @@ var Galaga = function ()
 	draw = function ()
 	{
 		//clear();
+		fill(0,100,100);
 		textSize(30);
 		if(!GameOver){
 			background(0);
