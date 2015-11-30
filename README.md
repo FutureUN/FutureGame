@@ -8,7 +8,7 @@ Powered by [Jimmy Pulido](https://github.com/jiapulidoar) - [Sebstian Chaves] (h
 
 Or proyect consisted of a series of minigames. The player select wich one of them want to play. 
 They are easy to play ( and lose ) for more entertaiment. 
-The games _DOESN'T_ run correctly on  GOOGLE CHROME, so we define the prefered browsers as: Mozilla Firefox and Opera.
+The games _DOESN'T_ run correctly on  GOOGLE CHROME, so we define the prefered browsers as: Only Mozilla Firefox .
 
 ## Instalation 
 
