@@ -29,7 +29,7 @@ The mini games are:
 
  <img src="Img/Galaga.png" alt="Galaga" with="250" height="250"></img>
 
-- Clouds
+- Trasmi-Clouds
  
  <img src="Img/Cloud.png" alt="Cloud" with="250" height="250"></img>
 
