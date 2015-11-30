@@ -1,6 +1,7 @@
 var Colors = function ()
 {
 	var fst_cube , color_Cube,n, cubes, drop;
+	var count = 0;
 	var GameOver = true;
 	this.setup = function()
 	{
@@ -53,29 +54,36 @@ var Colors = function ()
  		if ( ! GameOver ) // if is playing 
  		{
  			drawSprite(drop);
- 			drop.velocity.y = 1.0;
+ 			drop.velocity.y = 4;
  		    drop.position.x = constrain(mouseX, 0, width);	
+ 		    text ( count , 200 , 200);
 			for ( var i = 0 ; i < 5 ; i ++ )	
-				if ( drop.overlap(cubes[i]) ) // check the overlapping and send to the function
+				if ( drop.overlap(cubes[i]) ) // check the overlapping and send to the 
+				//function that checks it 
 					check(cubes[i],i,drop);
  		}
  	};
- 	NewGame = function ()
+ 	NewGame = function () // starts a new game 
  	{
  			drop = createSprite( width /2 , 100 , 20 , 20);
- 			drop.shapeColor = addColor( 4 ); 
- 			drop.velocity.y = 1.0;
+ 			drop.shapeColor = addColor( GetRandom() ); 
+ 			drop.velocity.y = 30;
  	};
- 	check = function (cube, n,drop)//evaluate if the overlap was with the correct cube 
+ 	check = function (cube, n,drop)//evaluate if the drop overlap was with the correct cube 
+ 	// so, it define if continue the game, or finish it 
  	{
  		if ( drop.shapeColor == cube.shapeColor )
+ 		{
+ 			count++;
  			NewGame();
+ 		}	
  		else 
 	    {
-	    	text ( 'CLIK WITH THE MOUSE FOR A NEW GAME');
+	    	count = 0;
  			GameOver = true;
  		}		
  	};
+ 	//The mouse pressed is used for stating a new game 
     mousePressed = function()
    {
   		if(GameOver)
@@ -84,7 +92,10 @@ var Colors = function ()
     	    NewGame();
     	}    
 	}
-
+	GetRandom = function () 
+	{
+    return Math.floor(Math.random() * (4 - 0 + 1)) + 0;
+    }
 };
 var myp5 = new p5(sketch, 'colors'); 
 Colors.prototype = new sketch;
