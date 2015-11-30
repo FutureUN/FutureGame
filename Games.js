@@ -87,8 +87,8 @@ var sketch = function()
 		imgs.push(loadImage("Img/Galaga.png"));
 		imgs.push(loadImage("Img/Cloud.png"));
 		imgs.push(loadImage("Img/stick.png"));
-		imgs.push(loadImage("Img/stick.png"));
-		imgs.push(loadImage("Img/stick.png"));
+		imgs.push(loadImage("Img/colors.png"));
+		imgs.push(loadImage("Img/bounce.png"));
 	}
 }
 
