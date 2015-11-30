@@ -36,7 +36,7 @@ var Colors = function ()
         		color = "blue";
         		break;
         	case 3:
-        		color = "purple" ;
+        		color = "red" ;
         		break;
         	case 4:
         		color = "pink" ;
@@ -54,7 +54,7 @@ var Colors = function ()
  		if ( ! GameOver ) // if is playing 
  		{
  			drawSprite(drop);
- 			drop.velocity.y = 4;
+ 			drop.velocity.y = (count/5) + 1;
  		    drop.position.x = constrain(mouseX, 0, width);	
  		    text ( count , 200 , 200);
 			for ( var i = 0 ; i < 5 ; i ++ )	
@@ -65,9 +65,13 @@ var Colors = function ()
  	};
  	NewGame = function () // starts a new game 
  	{
+                
+			var nColor = addColor( GetRandom() );
+			var got = loadImage("images/"+nColor+".png");
  			drop = createSprite( width /2 , 100 , 20 , 20);
- 			drop.shapeColor = addColor( GetRandom() ); 
- 			drop.velocity.y = 30;
+ 			drop.shapeColor = nColor; 
+                drop.addImage(got);
+                        drop.velocity.y = 30;
  	};
  	check = function (cube, n,drop)//evaluate if the drop overlap was with the correct cube 
  	// so, it define if continue the game, or finish it 
