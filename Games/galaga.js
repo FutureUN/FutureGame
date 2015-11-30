@@ -14,6 +14,7 @@ var Galaga = function ()
 	var frame = 1;
 	var ROWS = 5 , COL = 12, total;
 	var bgImg, planeimg, bbee, gbee;
+	var destroyed, laser, start, explosion; 
 	
 	this.setup = function()
 	{
@@ -24,7 +25,12 @@ var Galaga = function ()
 		planeimg = loadImage("images/Galaga/Galaga.png");
 		bbee = loadAnimation("images/Galaga/bbee1.png", "images/Galaga/bbee2.png");
 		gbee = loadAnimation("images/Galaga/gbee1.png", "images/Galaga/gbee2.png");
-
+		destroyed = loadSound('Sounds/Galaga/galaga_destroyed.wav');
+		laser = loadSound('Sounds/Galaga/laser.wav');
+		laser.setVolume(0.2);
+		destroyed.setVolume(0.4);
+		start = loadSound('Sounds/Galaga/start.mp3');
+		explosion = loadSound('Sounds/Galaga/explosion.wav');
 		bgImg.frameDelay = 10;
 		GameOver = true;
 		asteroids = new Group(); 
@@ -33,6 +39,7 @@ var Galaga = function ()
 		Plane.addImage(planeimg);
   		//Plane.draw = function(){triangle(psize/2,0,0,psize,psize,psize) }
   		textSize(50);
+  		fill(0,100,100);
   		text("Click New Game",width/2,height/2);
 
 	};
@@ -52,7 +59,7 @@ var Galaga = function ()
 					bulls[i].remove();
 				}
 			for(var i=0;i<asteroids.length;i++)  //Die 
-				if(asteroids[i].position.y > height){
+				if(asteroids[i].position.y > height/1.2){
 					die();
 				}
 
@@ -74,10 +81,12 @@ var Galaga = function ()
 		total = 0; 
 		GameOver = false;
 		levels(level);
+		start.play();
 	}
 
 	die = function()
 	{
+		explosion.play();
 		GameOver = true;
 		updateSprites(false);
 		text("Click Again",width/2,height/2);
@@ -101,6 +110,7 @@ var Galaga = function ()
 			bulls.add(s);
 			s.velocity.y =  -4;
 			s.life=height/1.5;
+			laser.play();
 		}
 		//console.log(bulls);
 		if(GameOver)
@@ -109,6 +119,7 @@ var Galaga = function ()
 	};
 	erase  = function (asteroid, bull)
 	{
+		destroyed.play();
 		bull.remove();
 		asteroid.remove();
 		Count++;
@@ -127,7 +138,10 @@ var Galaga = function ()
 	  				asteroids.add(a);
 	  				a.velocity.y=0.15;
 	  				total++;
-	  				a.addAnimation("green",gbee);
+	  				if(j%2 !=0)
+	  					a.addAnimation("green",gbee);
+	  				else 
+	  					a.addAnimation("blue",bbee);
 	  				a.animation.frameDelay = 50;
 	  
 	  			}
@@ -137,7 +151,10 @@ var Galaga = function ()
 	  				asteroids.add(a);
 	  				a.velocity.y=0.15;
 	  				total++;
-	  				a.addAnimation("blue",bbee);
+	  				if(j%2 !=0)
+	  					a.addAnimation("green",gbee);
+	  				else 
+	  					a.addAnimation("blue",bbee);
 	  				a.animation.frameDelay = 50;
 	  			}
 	  		}
