@@ -38,6 +38,7 @@ var Galaga = function ()
 		Plane = createSprite(width/2, height/1.2, psize,psize);
 		Plane.addImage(planeimg);
   		//Plane.draw = function(){triangle(psize/2,0,0,psize,psize,psize) }
+  		textAlign(CENTER);
   		textSize(50);
   		fill(0,100,100);
   		text("Click New Game",width/2,height/2);
@@ -49,8 +50,10 @@ var Galaga = function ()
 		//clear();
 		fill(0,100,100);
 		textSize(30);
+		textAlign(CENTER);
 		if(!GameOver){
 			background(0);
+			animation( bgImg, width/2,height/2);
 			Plane.position.x = constrain(mouseX,psize/2,width-psize/2);
 
 			//camera.position.y = (Plane.position.y);
@@ -62,12 +65,13 @@ var Galaga = function ()
 			for(var i=0;i<asteroids.length;i++)  //Die 
 				if(asteroids[i].position.y > height/1.2){
 					die();
+					text("Click Again",width/2,height/2);
 				}
 
-			if(Count >= total)
+			if(Count >= total){
 				win();
-
-			animation( bgImg, width/2,height/2);
+				text("WIN!!!, Click Next Level",width/2,height/2);
+			}
 			text ( Count, width-40 , 30)
 			camera.on();
 			asteroids.overlap(bulls,erase);
@@ -96,11 +100,11 @@ var Galaga = function ()
 	}
 	win = function()
 	{
+		GameOver = true;
   		level++;
-  		text("WIN!!!, Click Next Level",width/2,height/2);
 		updateSprites(false);
+		fill(0,100,100);
 		asteroids.removeSprites();
-  		GameOver = true;
   		
 	}
 
@@ -139,7 +143,7 @@ var Galaga = function ()
 	  				asteroids.add(a);
 	  				a.velocity.y=0.15;
 	  				total++;
-	  				if(j%2 !=0)
+	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
 	  					a.addAnimation("blue",bbee);
@@ -152,7 +156,7 @@ var Galaga = function ()
 	  				asteroids.add(a);
 	  				a.velocity.y=0.15;
 	  				total++;
-	  				if(j%2 !=0)
+	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
 	  					a.addAnimation("blue",bbee);
@@ -170,7 +174,7 @@ var Galaga = function ()
 	  				asteroids.add(a);
 	  				a.velocity.y=0.3;
 	  				total++;
-	  				if(j%2 !=0)
+	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
 	  					a.addAnimation("blue",bbee);
