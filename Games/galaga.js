@@ -14,7 +14,7 @@ var Galaga = function ()
 	var frame = 1;
 	var ROWS = 5 , COL = 12, total;
 	var bgImg, planeimg, bbee, gbee;
-	var destroyed, laser, start, explosion; 
+	var destroyed, laser, start, explosion, wins; 
 	
 	this.setup = function()
 	{
@@ -31,6 +31,7 @@ var Galaga = function ()
 		destroyed.setVolume(0.4);
 		start = loadSound('Sounds/Galaga/start.mp3');
 		explosion = loadSound('Sounds/Galaga/explosion.wav');
+		wins = loadSound('Sounds/Galaga/coin_credit.wav');
 		bgImg.frameDelay = 10;
 		GameOver = true;
 		asteroids = new Group(); 
@@ -75,6 +76,7 @@ var Galaga = function ()
 
 			r = parseInt(random(0,asteroids.length));
 
+
 			if(second() % 2)
 			{
 				moved = true;
@@ -97,6 +99,7 @@ var Galaga = function ()
 	{
 		r = parseInt(random(asteroids.length));
 		asteroids[r].setSpeed(1,90);
+		asteroids[r].rotationSpeed = 3;
 		moved = false;
 	}
 
@@ -122,6 +125,7 @@ var Galaga = function ()
 	}
 	win = function()
 	{
+		wins.play();
 		GameOver = true;
   		level++;
 		updateSprites(false);
@@ -192,7 +196,7 @@ var Galaga = function ()
 	  			{
 	  				var a = createSprite( 45*(j+1),25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.3;
+	  				a.velocity.y=0.1;
 	  				total++;         //Total Asteroid 
 	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
