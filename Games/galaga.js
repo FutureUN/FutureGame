@@ -8,7 +8,7 @@ var Galaga = function ()
 {	
 	var Plane;
 	var img; 
-	var psize = 50, GameOver;
+	var psize = 50, GameOver,  moved;
 	var asteroids, Count, level = 0; 
 	var bulls ;
 	var frame = 1;
@@ -72,12 +72,33 @@ var Galaga = function ()
 				win();
 				text("WIN!!!, Click Next Level",width/2,height/2);
 			}
+
+			r = parseInt(random(0,asteroids.length));
+
+			if(second() % 2)
+			{
+				moved = true;
+			}
+
+			if( second() % 2 == 0 && moved)
+				{ 
+					movebee();
+				}
+			
+
 			text ( Count, width-40 , 30)
 			camera.on();
 			asteroids.overlap(bulls,erase);
 			drawSprites();
 		}
 	};
+
+	movebee = function()
+	{
+		r = parseInt(random(asteroids.length));
+		asteroids[r].setSpeed(1,90);
+		moved = false;
+	}
 
 	newgame = function()
 	{
@@ -87,6 +108,7 @@ var Galaga = function ()
 		GameOver = false;
 		levels(level);
 		start.play();
+		moved = true;
 	}
 
 	die = function()
@@ -141,8 +163,7 @@ var Galaga = function ()
 	  			{
 	  				var a = createSprite( 25*(j+1),25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.15;
-	  				total++;
+	  				total++;     //total asteroid
 	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
@@ -154,8 +175,7 @@ var Galaga = function ()
 	  			{
 	  				var a = createSprite( 25*(j) + 25 *COL,25*(i+1), 20,20);
 	  				asteroids.add(a);
-	  				a.velocity.y=0.15;
-	  				total++;
+	  				total++;         // Total asteroid
 	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
@@ -173,7 +193,7 @@ var Galaga = function ()
 	  				var a = createSprite( 45*(j+1),25*(i+1), 20,20);
 	  				asteroids.add(a);
 	  				a.velocity.y=0.3;
-	  				total++;
+	  				total++;         //Total Asteroid 
 	  				if((j+i)%2 !=0)
 	  					a.addAnimation("green",gbee);
 	  				else 
