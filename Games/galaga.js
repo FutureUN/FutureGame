@@ -9,12 +9,12 @@ var Galaga = function ()
 	var Plane;
 	var img; 
 	var psize = 50, GameOver,  moved;
-	var asteroids, Count, level = 0; 
+	var asteroids, Count, level = 0, lifes; 
 	var bulls ;
 	var frame = 1;
 	var ROWS = 5 , COL = 12, total;
 	var bgImg, planeimg, bbee, gbee;
-	var destroyed, laser, start, explosion, wins; 
+	var destroyed, destroyed2, laser, start, explosion, wins; 
 	
 	this.setup = function()
 	{
@@ -26,13 +26,16 @@ var Galaga = function ()
 		bbee = loadAnimation("images/Galaga/bbee1.png", "images/Galaga/bbee2.png");
 		gbee = loadAnimation("images/Galaga/gbee1.png", "images/Galaga/gbee2.png");
 		destroyed = loadSound('Sounds/Galaga/galaga_destroyed.wav');
+		destroyed2 = loadSound('Sounds/Galaga/galaga_destroyed2.wav');
 		laser = loadSound('Sounds/Galaga/laser.wav');
 		laser.setVolume(0.2);
 		destroyed.setVolume(0.4);
+		destroyed2.setVolume(0.5);
 		start = loadSound('Sounds/Galaga/start.mp3');
 		explosion = loadSound('Sounds/Galaga/explosion.wav');
 		wins = loadSound('Sounds/Galaga/coin_credit.wav');
-		bgImg.frameDelay = 10;
+
+		bgImg.frameDelay = 11;
 		GameOver = true;
 		asteroids = new Group(); 
 		bulls =  new Group(); 
@@ -50,7 +53,7 @@ var Galaga = function ()
 	{
 		//clear();
 		fill(0,100,100);
-		textSize(30);
+		textSize(20);
 		textAlign(CENTER);
 		if(!GameOver){
 			background(0);
@@ -63,10 +66,13 @@ var Galaga = function ()
 				if(bulls[i].position.y < 0){
 					bulls[i].remove();
 				}
+
+
+
 			for(var i=0;i<asteroids.length;i++)  //Die 
 				if(asteroids[i].position.y > height/1.2){
+					asteroids[i].remove();
 					die();
-					text("Click Again",width/2,height/2);
 				}
 
 			if(Count >= total){
@@ -87,10 +93,14 @@ var Galaga = function ()
 					movebee();
 				}
 			
-
-			text ( Count, width-40 , 30)
-			camera.on();
-			asteroids.overlap(bulls,erase);
+			///Highs score and Lifes 
+			text("HIGH SCORE "+ lifes, width/1.2, height/1.1 +20);
+			fill(255);
+			text (Count, width/1.2, height/1.1 + 40)
+			for(var i = 0 ; i< lifes; i++)
+				image(planeimg,i*50,height/1.1,40,40);
+			///
+			asteroids.overlap(bulls,erase); // Bulls and Asteroids overlap
 			drawSprites();
 		}
 	};
@@ -108,6 +118,7 @@ var Galaga = function ()
 		updateSprites(true);
 		Count = 0;
 		total = 0; 
+		lifes = 3;
 		GameOver = false;
 		levels(level);
 		start.play();
@@ -117,12 +128,15 @@ var Galaga = function ()
 	die = function()
 	{
 		explosion.play();
-		GameOver = true;
-		updateSprites(false);
-		text("Click Again",width/2,height/2);
-  		asteroids.removeSprites();
-  		
-	}
+		lifes--;
+		if(lifes < 0 ){
+			GameOver = true;
+			updateSprites(false);
+			text("Click Again",width/2,height/2);
+	  		asteroids.removeSprites();
+  		}
+  	}
+
 	win = function()
 	{
 		wins.play();
@@ -150,7 +164,10 @@ var Galaga = function ()
 	};
 	erase  = function (asteroid, bull)
 	{
-		destroyed.play();
+		if(asteroid.getAnimationLabel() == 'blue')
+			destroyed.play();
+		else
+			destroyed2.play();
 		bull.remove();
 		asteroid.remove();
 		Count++;
