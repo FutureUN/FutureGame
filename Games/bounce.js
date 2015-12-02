@@ -9,7 +9,7 @@ var Bounce = function ()
 	var static = false;
 	var obstacles , obstacle, obstacle2, star; 
 	var colp = loadImage("images/win.png");
-	var lose = loadImage("images/lose.jpg");
+	var lose = loadImage("images/lose.png");
 	var imClick = loadImage("images/click.png");
 	var enem = loadAnimation ("images/Bounce/e1.png","images/Bounce/e2.png","images/Bounce/e3.png","images/Bounce/e4.png","images/Bounce/e5.png");
 	var numEne = 1;
@@ -27,10 +27,9 @@ var Bounce = function ()
 
 	//	initGame();
 		GameOver = true;		
-		//obstacles.add(obstacle);
 		win = createSprite ( width/2,height/2,10,10);
 		win.addImage(imClick);
-		//drawSprite(win);
+		drawSprite(win);
 		//updateSprites(true);
 
 	};
@@ -116,13 +115,10 @@ var Bounce = function ()
 			bounce.collide(obstacle, function(){static = true; bounce.velocity.y=0; });
 			bounce.collide(obstacle2, function(){static = true; bounce.velocity.y=0; });
 			bounce.collide(star, finish);
-			drawSprites();
+		}
+		drawSprites();
 			
-		}
-		else
-		{
-			drawSprite(win);
-		}
+
 		
 	};
 	mousePressed = function() {
