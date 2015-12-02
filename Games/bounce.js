@@ -19,18 +19,19 @@ var Bounce = function ()
 	var song, sWin, sDie;
 	this.setup = function()
 	{
+		background(200,50,100);
 		song = loadSound('Sounds/all.mp3');
 		song.setVolume(0.2);
 		sWin = loadSound('Sounds/Stick/win.wav');
 		sDie = loadSound('Sounds/Galaga/explosion.wav');
-		win = createSprite ( width/2,height/2,10,10);
-		win.addImage(imClick);
-		drawSprite(win);
-		
 
 	//	initGame();
 		GameOver = true;		
 		//obstacles.add(obstacle);
+		win = createSprite ( width/2,height/2,10,10);
+		win.addImage(imClick);
+		//drawSprite(win);
+		//updateSprites(true);
 
 	};
 	initGame = function()
@@ -42,7 +43,7 @@ var Bounce = function ()
 		}
 		bounce = createSprite(width/2,height-30,30,30);
 		bounce.draw = function(){ fill(180,100,100); ellipse(0,0,30,30) };
-		bounce.maxSpeed = 10;
+		bounce.maxSpeed = 6;
 
 		obstacles = new Group();
 
@@ -115,9 +116,14 @@ var Bounce = function ()
 			bounce.collide(obstacle, function(){static = true; bounce.velocity.y=0; });
 			bounce.collide(obstacle2, function(){static = true; bounce.velocity.y=0; });
 			bounce.collide(star, finish);
+			drawSprites();
 			
 		}
-		drawSprites();
+		else
+		{
+			drawSprite(win);
+		}
+		
 	};
 	mousePressed = function() {
 		console.log("click");
@@ -173,10 +179,10 @@ var Bounce = function ()
 	Keydown = function()
 	{
 		if(keyIsDown(RIGHT_ARROW))
-			bounce.velocity.x = 1;
+			bounce.velocity.x  = 1.3;
 
 		if(keyIsDown(LEFT_ARROW))
-			bounce.velocity.x = -1;
+			bounce.velocity.x = -1.3;
 
 		if(bounce.velocity.y == 0)
 		if(keyIsDown(UP_ARROW) ){

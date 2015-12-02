@@ -4,6 +4,9 @@ var Colors = function ()
 	var count =0;
 	var GameOver = true;
 	var song = loadSound('Sounds/all.mp3');
+        var imp  = loadSound('Sounds/Stick/win.wav');
+        var imClick = loadImage("images/click.png");
+	var win = createSprite ( width/2,height/2,10,10);;
 	this.setup = function()
 	{
 		//createCanvas(600,600);
@@ -11,7 +14,9 @@ var Colors = function ()
 		//Create a group of sprites "cubes" with different colors 
 		//that will be the target of the drop.
 		cubes= new Group();
+                song.setVolume(0.2);
 		fst_cube = width / 10; 
+
 		for ( var i = 0 ; i < 5 ; i ++ )	
 		{
 			color_Cube = createSprite( fst_cube, 600, width/5 , 50); 
@@ -19,6 +24,7 @@ var Colors = function ()
 			fst_cube += width / 5;
 			cubes.add(color_Cube);
 		}	
+		updateSprites(true);
 	};
 	
 	addColor= function(n)
@@ -67,6 +73,13 @@ var sprScore ;
 				//function that checks it 
 					check(cubes[i],i,drop);
  		}
+ 		else
+ 		{
+ 			
+			win.addImage(imClick);
+			drawSprite(win);
+
+ 		}
  	};
  	var arrScore = [];
  	score = function(s)
@@ -111,11 +124,13 @@ var sprScore ;
  	{
  		if ( drop.shapeColor == cube.shapeColor )
  		{
+            imp.play();
  			count++;
  			NewGame();
  		}	
  		else 
 	    {
+	    	win = createSprite ( width/2,height/2,10,10);
 	   		for ( var i = 0 ; i < arrScore.length; i ++)
  			{
  				arrScore[i].remove();
@@ -130,6 +145,7 @@ var sprScore ;
    {
   		if(GameOver)
   		{
+  			win.remove();
   			if ( song.isPlaying())
   				song.stop();
   			song.play();
