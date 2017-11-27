@@ -41,9 +41,9 @@ function preload() {
   //
   //    Below demonstrates both methods:
 
-  song = loadSound('sounds/FunLoop.mp3');
-  winS = loadSound('sounds/TaDa.mp3');
-  crash = loadSound('sounds/crash.wav');
+  song = loadSound('Sounds/FunLoop.mp3');
+  winS = loadSound('Sounds/TaDa.mp3');
+  crash = loadSound('Sounds/crash.wav');
   // Load the json for the tiles sprite sheet
   tile_frames = loadJSON('assets/tiles.json');
 
